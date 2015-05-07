@@ -37,17 +37,15 @@ static void update_time() {
   struct tm *tick_time = localtime(&temp);
 
   // Create a long-lived buffer
-  static char buffer[] = "00:00";
-
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "update time start");
+  static char buffer[] = "00:00:00";
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == FMT24H) {
     // Use 24 hour format
-    strftime(buffer, sizeof("00:00"), "%H:%M", tick_time);
+    strftime(buffer, sizeof("00:00:00"), "%H:%M:%S", tick_time);
   } else {
     // Use 12 hour format
-    strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
+    strftime(buffer, sizeof("00:00:00"), "%I:%M:%S", tick_time);
   }
 
   // Display this time on the TextLayer
@@ -179,7 +177,9 @@ static void getDeparture() {
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   update_time();
-  getDeparture();
+  if (units_changed & MINUTE_UNIT) {
+    getDeparture();
+  }
 }
 
 static void inbox_received_handler(DictionaryIterator *iterator, void *context) {
@@ -260,7 +260,7 @@ static void outbox_sent_handler(DictionaryIterator *iterator, void *context) {
 
 static void main_window_load(Window *window) {
   // Create Time TextLayer
-  text_time = text_layer_create(GRect(114, 0, 30, 30));
+  text_time = text_layer_create(GRect(99, 0, 45, 30));
   text_layer_set_background_color(text_time, GColorClear);
   text_layer_set_text_color(text_time, GColorBlack);
 
@@ -271,7 +271,7 @@ static void main_window_load(Window *window) {
   text_station = text_layer_create(GRect(0, 0, 144, 30));
   text_layer_set_background_color(text_station, GColorClear);
   text_layer_set_text_color(text_station, GColorBlack);
-  text_layer_set_text(text_station, "Stadtmitte Fake");
+  text_layer_set_text(text_station, "Loading ...");
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(text_station));
@@ -331,7 +331,7 @@ static void init() {
   app_message_register_outbox_sent(outbox_sent_handler);
 
   // Register with TickTimerService
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 
   // open AppMessage
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());

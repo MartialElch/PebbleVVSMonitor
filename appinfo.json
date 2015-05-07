@@ -12,14 +12,14 @@
     "capabilities": [
         "location"
     ],
-    "companyName": "stefan.reimbold@imail.de",
-    "longName": "TimeTable",
+    "companyName": "MartialElch",
+    "longName": "VVS Monitor",
     "projectType": "native",
     "resources": {
         "media": []
     },
     "sdkVersion": "2",
-    "shortName": "TimeTable",
+    "shortName": "VVS Monitor",
     "uuid": "366d83b3-4ae9-44a2-b8df-9bbb3b6eb58a",
     "versionCode": 1,
     "versionLabel": "1.0",
