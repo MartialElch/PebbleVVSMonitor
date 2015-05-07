@@ -8,6 +8,8 @@
 #define SIZE_DIRECTION 15
 #define SIZE_COUNTDOWN 2
 
+#define FMT24H  true
+
 static Window *window;
 static TextLayer *text_time;
 static TextLayer *text_station;
@@ -40,7 +42,7 @@ static void update_time() {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "update time start");
 
   // Write the current hours and minutes into the buffer
-  if(clock_is_24h_style() == true) {
+  if(clock_is_24h_style() == FMT24H) {
     // Use 24 hour format
     strftime(buffer, sizeof("00:00"), "%H:%M", tick_time);
   } else {
@@ -50,8 +52,6 @@ static void update_time() {
 
   // Display this time on the TextLayer
   text_layer_set_text(text_time, buffer);
-
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "update time done %s", buffer);
 }
 
 static void update_station(char *name) {
