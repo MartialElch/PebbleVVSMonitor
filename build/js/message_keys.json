@@ -1,0 +1,15 @@
+{
+    "Count": 10006,
+    "Countdown": 10010,
+    "Direction": 10009,
+    "FuncDeparture": 10001,
+    "FuncDepartureList": 10002,
+    "FuncServingLines": 10003,
+    "FuncStationList": 10000,
+    "Line": 10008,
+    "LineID": 10011,
+    "Product": 10012,
+    "Ready": 10007,
+    "StationID": 10005,
+    "StationName": 10004
+}

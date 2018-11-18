@@ -1,0 +1,36 @@
+# project  configured on Sun Nov 18 13:08:45 2018 by
+# waf 1.7.11 (abi 98, python 2070df0 on linux2)
+# using /home/reimbold/.pebble-sdk/SDKs/current/sdk-core/pebble/waf configure
+#
+----------------------------------------
+Setting top to
+/media/sf_pebble/pebble-dev/PebbleVVSMonitor
+----------------------------------------
+Setting out to
+/media/sf_pebble/pebble-dev/PebbleVVSMonitor/build
+----------------------------------------
+Checking for program webpack
+/home/reimbold/.pebble-sdk/SDKs/current/node_modules/.bin/webpack
+find program=['webpack'] paths=['/home/reimbold/.pebble-sdk/SDKs/current/node_modules/.bin'] var='WEBPACK' -> '/home/reimbold/.pebble-sdk/SDKs/current/node_modules/.bin/webpack'
+----------------------------------------
+Found Pebble SDK for basalt in:
+/home/reimbold/.pebble-sdk/SDKs/current/sdk-core/pebble/basalt
+----------------------------------------
+Checking for program gcc,cc
+arm-none-eabi-gcc
+find program=['gcc', 'cc'] paths='' var='CC' -> 'arm-none-eabi-gcc'
+----------------------------------------
+Checking for program ar
+arm-none-eabi-ar
+find program=['ar'] paths='' var='AR' -> 'arm-none-eabi-ar'
+----------------------------------------
+Found Pebble SDK for aplite in:
+/home/reimbold/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite
+----------------------------------------
+Checking for program gcc,cc
+arm-none-eabi-gcc
+find program=['gcc', 'cc'] paths='' var='CC' -> 'arm-none-eabi-gcc'
+----------------------------------------
+Checking for program ar
+arm-none-eabi-ar
+find program=['ar'] paths='' var='AR' -> 'arm-none-eabi-ar'

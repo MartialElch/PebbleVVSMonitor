@@ -1,0 +1,50 @@
+{
+  "name": "PebbleVVSMonitor",
+  "author": "MartialElch",
+  "version": "1.0.0",
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "VVS Monitor",
+    "uuid": "366d83b3-4ae9-44a2-b8df-9bbb3b6eb58a",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": [
+      "FuncStationList",
+      "FuncDeparture",
+      "FuncDepartureList",
+      "FuncServingLines",
+      "StationName",
+      "StationID",
+      "Count",
+      "Ready",
+      "Line",
+      "Direction",
+      "Countdown",
+      "LineID",
+      "Product"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "TICK_BLACK",
+          "file": "tick_black.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "TICK_WHITE",
+          "file": "tick_white.png"
+        }
+      ]
+    }
+  }
+}
