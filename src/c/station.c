@@ -20,10 +20,10 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 }
 
 static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *context) {
-  static char title[16];
+  static char title[18];
   int i = (int)cell_index->row;
 
-  snprintf(title, sizeof(title), "%s", Station[i].name);
+  snprintf(title, sizeof(title)-1, "%s", Station[i].name);
   menu_cell_basic_draw(ctx, cell_layer, title, NULL, NULL);
 }
 
@@ -43,7 +43,6 @@ static void getServingLines(uint32_t id) {
   Selection = 0;
   for (int i=0; i<SETTINGS_CHECKBOX_NUM_ROWS; i++) {
     Selection = Selection + (MenuSelection[i] << productid[i]);
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Selection = %d %d", Selection, MenuSelection[i]);
   }
 
   app_message_outbox_begin(&iterator);
@@ -54,7 +53,6 @@ static void getServingLines(uint32_t id) {
 }
 
 static void select_click_handler(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Menu Select %d", (int)cell_index->row);
   StationID = Station[(int)cell_index->row].id;
   StationName = Station[(int)cell_index->row].name;
   getServingLines(StationID);
@@ -63,8 +61,6 @@ static void select_click_handler(struct MenuLayer *menu_layer, MenuIndex *cell_i
 void station_message_handler(DictionaryIterator *iterator, void *context) {
   Tuple *msg;
   int n;
-
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "station list message received");
 
   msg = dict_find(iterator, MESSAGE_KEY_Count);
   n = msg->value->int8;
@@ -130,7 +126,6 @@ void station_window_push(void) {
   DictionaryIterator *iterator;
 
   if (!station_window) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "station window create");
     station_window = window_create();
     window_set_window_handlers(station_window, (WindowHandlers) {
       .load = window_load,

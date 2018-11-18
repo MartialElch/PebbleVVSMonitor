@@ -42,7 +42,6 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
 static void activate_countdown(int n) {
   Layer *window_layer = window_get_root_layer(departure_window);
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "activate departure countdown");
   COUNTDOWN = true;
 
   layer_remove_from_parent((Layer*)departure_menu_layer);
@@ -51,7 +50,6 @@ static void activate_countdown(int n) {
   layer_add_child(window_layer, text_layer_get_layer(departure_text_countdown));
 
   snprintf(LineID, SIZE_LINEID, Departure[n].lineid);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "n = %d lineid = %s StationID = %ld", n, LineID, StationID);
 
   update();
 }
@@ -59,7 +57,6 @@ static void activate_countdown(int n) {
 static void deactivate_countdown(void) {
   Layer *window_layer = window_get_root_layer(departure_window);
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "deactivate departure countdown");
   COUNTDOWN = false;
 
   layer_remove_from_parent((Layer*)departure_text_countdown);
@@ -112,9 +109,6 @@ void countdown_message_handler(DictionaryIterator *iterator, void *context) {
   filterChar(destination, 0x83);
   filterChar(destination, 0xc2);
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Countdown = %s", countdown);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Destination = %s", destination);
-
   text_layer_set_text(departure_text_countdown, countdown);
   text_layer_set_text(departure_text_direction, destination);
 }
@@ -130,7 +124,6 @@ void departure_message_handler(DictionaryIterator *iterator, void *context) {
 
   NRows = n;
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "departure list message received");
   uint8_t line_keys[n];
   msg = dict_find(iterator, MESSAGE_KEY_Line);
   memcpy(line_keys, msg->value->data, n);
@@ -188,8 +181,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void departure_window_load(Window *window) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "departure window load");
-
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
@@ -243,8 +234,6 @@ static void departure_window_load(Window *window) {
 }
 
 static void departure_window_unload(Window *window) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "departure window unload");
-
   tick_timer_service_unsubscribe();
 
   text_layer_destroy(departure_text_time);
@@ -259,7 +248,6 @@ static void departure_window_unload(Window *window) {
 
 void departure_window_push(uint32_t id, char *name) {
   if (!departure_window) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "departure window create");
     departure_window = window_create();
     window_set_window_handlers(departure_window, (WindowHandlers) {
       .load = departure_window_load,

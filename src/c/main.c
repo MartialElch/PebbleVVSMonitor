@@ -28,7 +28,6 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
 static void select_click_handler(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
   int i;
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Menu Select %d", (int)cell_index->row);
   i = (int)cell_index->row;
   if (i == 0) {
     if (JSREADY)

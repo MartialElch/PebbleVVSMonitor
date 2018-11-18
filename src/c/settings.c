@@ -44,7 +44,6 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
       SETTINGS_CHECKBOX_BOX_SIZE, SETTINGS_CHECKBOX_BOX_SIZE);
     graphics_draw_rect(ctx, r);
     if(MenuSelection[cell_index->row]) {
-      APP_LOG(APP_LOG_LEVEL_DEBUG, "draw checkmark");
       graphics_context_set_compositing_mode(ctx, GCompOpSet);
       graphics_draw_bitmap_in_rect(ctx, ptr, GRect(r.origin.x, r.origin.y - 3, bitmap_bounds.size.w, bitmap_bounds.size.h));
     }
@@ -93,6 +92,7 @@ static void window_load(Window *window) {
   MenuItem[0] = SETTINGS_CHECKBOX_CELL_0_HINT;
   MenuItem[1] = SETTINGS_CHECKBOX_CELL_1_HINT;
   MenuItem[2] = SETTINGS_CHECKBOX_CELL_2_HINT;
+  MenuItem[3] = SETTINGS_CHECKBOX_CELL_3_HINT;
 
   layer_add_child(window_layer, menu_layer_get_layer(menu_layer));
 }
@@ -109,7 +109,6 @@ static void window_unload(Window *window) {
 
 void settings_window_push(void) {
   if (!settings_window) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "station window create");
     settings_window = window_create();
     window_set_window_handlers(settings_window, (WindowHandlers) {
       .load = window_load,
